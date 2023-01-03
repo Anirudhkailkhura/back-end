@@ -22,7 +22,7 @@ mongoose.connect(process.env.MONGO_URL)
 
   app.use(
     cors({
-      origin: "*",
+      origin:[ "*"," https://dhaarmik-app.onrender.com"],
     })
   )
 
