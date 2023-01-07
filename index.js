@@ -20,11 +20,12 @@ mongoose.connect(process.env.MONGO_URL)
     console.log(err);
   });
 
-  app.use(
+ app.use(
     cors({
-      origin:[ "*"," https://dhaarmik-app.onrender.com"],
+      origin: "*"
     })
   )
+
 
 
 app.use(express.json());
@@ -33,6 +34,13 @@ app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
+
+if (process.env.NODE_ENV === 'production') {
+    
+    app.use(express.static('my-app/build'));
+
+    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'my-app', 'build','index.html')));
+
 
 
 
